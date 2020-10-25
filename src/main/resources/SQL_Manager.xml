@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--Mybatis的主配置文件-->
+<configuration>
+    <!--配置properties可以在标签内部也可以通过属性引用外部配置文件的信息-->
+    <properties resource="jdbcConfig.properties"></properties>
+
+    <typeAliases>
+<!--        <typeAlias type="com.Entity.Student" alias="student"></typeAlias>-->
+        <package name="com.Entity"/>
+    </typeAliases>
+
+<!--    配置环境-->
+    <environments default="mysql">
+        <environment id="mysql">
+<!--            配置MySQL的环境-->
+            <transactionManager type="JDBC"></transactionManager>
+<!--            配置数据源(连接池)-->
+            <dataSource type="POOLED">
+<!--                配置数据库的四个基本信息-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    指定映射配置文件的位置，映射文件指的是每个dao独立的配置文件-->
+    <mappers>
+        <!--<mapper resource="com/DAO/IStudentDao.xml"></mapper>-->
+        <!--package标签是用于指定dao接口所在的包，当指定了以后就不需要在写resource或者class了-->
+        <package name="com.DAO"/>
+    </mappers>
+</configuration >
